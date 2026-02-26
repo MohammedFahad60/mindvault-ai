@@ -1,20 +1,19 @@
 import os
-from cryptography.fernet import Fernet
-from dotenv import load_dotenv
 import logging
 from datetime import datetime
-
-# Setup Audit Logger
-logging.basicConfig(filename='logs/security_audit.log', level=logging.INFO)
+from cryptography.fernet import Fernet
+from dotenv import load_dotenv
 
 load_dotenv()
 
-# NEW: Professional directory check for Cloud Deployment
+# 1. NEW: Professional directory check for Cloud Deployment
+# We must create the folder BEFORE calling basicConfig
 log_dir = 'logs'
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 
-# Now this won't crash on Render
+# 2. Setup Audit Logger (ONLY ONE CONFIG CALL)
+# This will now safely create the file because the directory exists
 logging.basicConfig(
     filename=os.path.join(log_dir, 'security_audit.log'), 
     level=logging.INFO,
@@ -37,5 +36,6 @@ class DataShield:
         return self.cipher.decrypt(encrypted_text.encode()).decode()
     
     def audit_access(self, action, user_id):
+        """Logs security events for compliance."""
         timestamp = datetime.now().isoformat()
         logging.info(f"AUDIT | {timestamp} | Action: {action} | User: {user_id} | Status: SUCCESS")

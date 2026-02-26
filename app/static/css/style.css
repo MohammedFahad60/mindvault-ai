@@ -86,3 +86,55 @@ h4, h5, .h5 { color: var(--text-primary) !important; font-weight: 700; }
 }
 
 #user-input::placeholder { color: var(--text-secondary); }
+
+
+/* --- MOBILE RESPONSIVENESS --- */
+
+@media (max-width: 992px) {
+    .dashboard-container {
+        grid-template-columns: 1fr; /* Stack everything in 1 column */
+        grid-template-rows: auto 1fr auto; /* Sidebar top, Chat middle, Stats bottom */
+        height: auto; /* Allow the page to grow longer */
+        overflow-y: auto;
+        padding: 10px;
+    }
+
+    .sidebar {
+        order: 1;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .chat-area {
+        order: 2;
+        height: 80vh; /* Keep the chat window tall enough to read */
+        margin-bottom: 10px;
+    }
+
+    .stats-panel {
+        order: 3;
+        height: auto;
+    }
+
+    /* Adjust bubbles for smaller screens */
+    .message {
+        max-width: 95%;
+        font-size: 0.85rem;
+    }
+
+    /* Hide less important stats on mobile to save space */
+    .stats-panel h5 {
+        font-size: 1rem;
+    }
+}
+
+/* Touch-friendly input for mobile */
+@media (max-width: 576px) {
+    .input-container {
+        padding: 12px;
+    }
+    
+    #user-input {
+        font-size: 16px; /* Prevents iOS from zooming in on focus */
+    }
+}

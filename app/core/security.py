@@ -9,12 +9,14 @@ logging.basicConfig(filename='logs/security_audit.log', level=logging.INFO)
 
 load_dotenv()
 
-LOG_DIR = 'logs'
-if not os.path.exists(LOG_DIR):
-    os.makedirs(LOG_DIR)
+# NEW: Professional directory check for Cloud Deployment
+log_dir = 'logs'
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
 
+# Now this won't crash on Render
 logging.basicConfig(
-    filename=os.path.join(LOG_DIR, 'security_audit.log'), 
+    filename=os.path.join(log_dir, 'security_audit.log'), 
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )

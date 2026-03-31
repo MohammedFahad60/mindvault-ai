@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, jsonify
 import os
-from core.security import DataShield
-from core.anonymizer import ProfessionalAnonymizer # Use ONLY the class
-from core.ai_engine import MentalHealthBot
-from database.models import ChatDatabase
+from app.core.security import DataShield
+from app.core.anonymizer import ProfessionalAnonymizer # Use ONLY the class
+from app.core.ai_engine import MentalHealthBot
+from app.database.models import ChatDatabase
 
 # 1. Initialize the Flask App
 app = Flask(__name__)
